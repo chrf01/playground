@@ -28,5 +28,3 @@ ru = lambda x : p.recvuntil(x)
 rl = lambda : p.recvline()
 cl = lambda : p.clean()
 uu64 = lambda x : u64(x.ljust(8, b"\x00"))
-
-# exploit start here #
