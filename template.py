@@ -2,13 +2,15 @@ from pwn import *
 
 context.log_level = 'DEBUG'
 
+host, port = "",1000
+
 exe = ELF('<EXE>')
 libc = ELF('<LIBC>')
 ld = ELF('<LD>')
 
 if args.REMOTE:
     p = remote(host, port)
-else if args.DEBUG:
+elif args.DEBUG:
     p = gdb.debug([exe.path, ld.path], env={'LD_PRELOAD': libc.path})
 else:
     p = process([exe.path, ld.path], env={'LD_PRELOAD': libc.path})
@@ -28,3 +30,7 @@ ru = lambda x : p.recvuntil(x)
 rl = lambda : p.recvline()
 cl = lambda : p.clean()
 uu64 = lambda x : u64(x.ljust(8, b"\x00"))
+
+# exploit #
+
+p.interactive()
